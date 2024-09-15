@@ -1,7 +1,6 @@
-let htmlProducts = '';
+let htmlProducts = "";
 
-products.forEach((product)=>{
-
+products.forEach((product) => {
   htmlProducts += `
           <div class="product-container">
           <div class="product-image-container">
@@ -22,7 +21,7 @@ products.forEach((product)=>{
           </div>
 
           <div class="product-price">
-            ${(product.priceCents/100).toFixed(2)}
+            ${(product.priceCents / 100).toFixed(2)}
           </div>
 
           <div class="product-quantity-container">
@@ -47,11 +46,26 @@ products.forEach((product)=>{
             Added
           </div>
 
-          <button class="add-to-cart-button button-primary  add-to-cart-button">
+          <button class="add-to-cart-button button-primary  add-to-cart-button" data-product-name="${product.name}">
             Add to Cart
           </button>
         </div>
-  `
-})
+  `;
+});
 
-document.getElementById('product-container').innerHTML = htmlProducts;
+document.getElementById("product-container").innerHTML = htmlProducts;
+
+document.querySelectorAll(".add-to-cart-button").forEach((button) => {
+  button.addEventListener("click", () => {
+    //console.log(button.dataset.productName);
+
+    let productName = button.dataset.productName;
+
+    cart.push({
+      productName: productName,
+      quantity: 1
+    })
+
+    console.log(cart);
+  });
+});
